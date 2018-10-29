@@ -1,21 +1,7 @@
-import { IPlainAction, IAction, IPlainFailAction, IFailAction } from './types';
-
-type IGenericPlainAction = IPlainAction<string>;
-type IGenericAction = IAction<string, any>;
-type IGenericPlainFailAction = IPlainFailAction<string>;
-type IGenericFailAction = IFailAction<string, any>;
-
-type NullaryAC<A extends IGenericPlainAction> = () => A;
-type UnaryAC<A extends IGenericAction> = (payload: A['payload']) => A;
-
-type NullaryFailedAC<A extends IGenericPlainFailAction> = (error: A['error']) => A;
-type UnaryFailedAC<A extends IGenericFailAction> = (error: A['error'], payload: A['payload']) => A;
-
-interface ICommunicationActionCreators<E, C, F> {
-  execute: E;
-  completed: C;
-  failed: F;
-}
+import {
+  ICommunicationActionCreators, IGenericAction, NullaryAC, IGenericFailAction, UnaryAC, UnaryFailedAC,
+  IGenericPlainFailAction, NullaryFailedAC, IGenericPlainAction,
+} from './types';
 
 function makeCommunicationActionCreators<
   E extends IGenericAction, C extends IGenericAction, F extends IGenericFailAction
