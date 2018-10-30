@@ -1,4 +1,4 @@
-import { ICommunication } from './types';
+import { ICommunication } from './namespace';
 
 export const initialCommunicationField: ICommunication = { isRequesting: false, error: '' };
 

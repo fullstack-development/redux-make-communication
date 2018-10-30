@@ -1,4 +1,4 @@
-import { ICommunication, IPlainAction, IPlainFailAction, IProtectAction } from './types';
+import { ICommunication, IPlainAction, IPlainFailAction, IProtectAction } from './namespace';
 
 export default function makeCommunicationReducer<
   E extends IPlainAction<string> = IProtectAction,

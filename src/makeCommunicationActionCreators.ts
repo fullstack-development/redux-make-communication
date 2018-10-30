@@ -1,7 +1,7 @@
 import {
   ICommunicationActionCreators, IGenericAction, NullaryAC, IGenericFailAction, UnaryAC, UnaryFailedAC,
   IGenericPlainFailAction, NullaryFailedAC, IGenericPlainAction,
-} from './types';
+} from './namespace';
 
 function makeCommunicationActionCreators<
   E extends IGenericAction, C extends IGenericAction, F extends IGenericFailAction
