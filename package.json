@@ -1,5 +1,5 @@
 {
-  "name": "redux-make-communication",
+  "name": "@fsd/redux-make-communication",
   "version": "0.0.1",
   "description": "Make communication actions and reducers for redux",
   "main": "dist/index.js",
@@ -12,7 +12,6 @@
     "url": "git+https://github.com/fullstack-development/redux-make-communication.git"
   },
   "keywords": [
-    "React",
     "redux",
     "actions",
     "reducers",
