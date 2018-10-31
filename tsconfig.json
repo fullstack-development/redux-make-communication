@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types", "./@types"],
+    "typeRoots": ["./node_modules/@types"],
     "traceResolution": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
@@ -13,8 +13,8 @@
     "esModuleInterop": true,
     "strict": true
   },
-  "files": [
-    "./src/index.ts"
+  "include": [
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
