@@ -1,0 +1,29 @@
+{
+  "name": "@fsd/redux-make-communication",
+  "version": "0.0.1",
+  "description": "Make communication actions and reducers for redux",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullstack-development/redux-make-communication.git"
+  },
+  "keywords": [
+    "redux",
+    "actions",
+    "reducers",
+    "communication"
+  ],
+  "author": "Fullstack Development",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fullstack-development/redux-make-communication/issues"
+  },
+  "homepage": "https://github.com/fullstack-development/redux-make-communication#readme",
+  "devDependencies": {
+    "typescript": "^3.1.3"
+  }
+}
