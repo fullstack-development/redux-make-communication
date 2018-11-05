@@ -1,6 +1,59 @@
 # redux-make-communication
 Make communication actions and reducers for redux
 
+## Motivation
+This library provides tools for creating and managing actions and reducers to manage your state when accessing a third-party server or backend server. The created state provides a flag for processing the status of the request, showing its error if there is one. Based on this state, you can display the process of client communication with the server.
+### How it was
+Action creators
+```javascript
+const fetchDeposit = (data) => {
+  type: 'FETCH_DEPOSIT',
+  payload: { data },
+}
+const fetchDepositComplete = (data) => {
+  type: 'FETCH_DEPOSIT_COMPLETE',
+  payload: { data },
+}
+const fetchDepositFailed = (error) => {
+  type: 'FETCH_DEPOSIT_FAILED',
+  payload: { error },
+}
+```
+```javascript
+// Use redux-saga for example
+...
+const fetchDepositType = 'FETCH_DEPOSIT';
+
+function getSaga(deps) {
+  return function* saga() {
+    yield takeLatest(fetchDeposit, executeFetchDeposit, deps);
+  };
+}
+
+function* executeFetchDeposit({ api }) {
+  try {
+    const response = yield call(api.fetchDeposit);
+    yield put(actions.fetchDepositComplete(response));
+  } catch (error) {
+    yield put(actions.fetchDepositFailed(error));
+  }
+}
+```
+Reducers
+```javascript
+const depositReducer = (state, action) => {
+  return (state = initial, action) => {
+    switch (action.type) {
+      case 'FETCH_DEPOSIT_COMPLETE':
+        return { state: actions.payload };
+      case 'FETCH_DEPOSIT_FAILED':
+        return { state: actions.error };
+      default: return state;
+    }
+  };
+}
+```
+Library allow you to formalize and typify the management of your actions, encapsulating the logic of creating actions and reducers.
 ## Installation
 ```sh
 npm install @fsd/redux-make-communication --save
@@ -9,19 +62,30 @@ npm install @fsd/redux-make-communication --save
 yarn add @fsd/redux-make-communication
 ```
 ## API
-`makeCommunicationActionCreators(string, string, string)` - a function that takes action(`communication`, `comlete`, `failed`) types and returns an action creators (`communicationAction`, `completedAction`, `FailedAction`).
+`makeCommunicationActionCreators(string, string, string)` - a function that takes action(`execute`, `complete`, `failed`) types and returns an action creators (`executeAction`, `completedAction`, `FailedAction`).
 
-`makeCommunicationReducer('' | { string, boolean })` - a function that takes action(`communication`, `comlete`, `failed`) types and initial state of reducer and returns a redux state.
+`makeCommunicationReducer('' | { string, boolean })` - a function that takes action(`execute`, `complete`, `failed`) types and initial state of reducer and returns a redux state.
 ## Usage
-### Create actions creators with `makeCommunicationActionCreators`
+### Create action creators with `makeCommunicationActionCreators`
 ```typescript
 import { makeCommunicationActionCreators } from '@fsd/redux-make-communication';
 import * as NS from './namespace';
 
 export const { execute: chooseDeposit, completed: chooseDepositCompleted, failed: chooseDepositFail } =
   makeCommunicationActionCreators<NS.IChooseDeposit, NS.IChooseDepositCompleted, NS.IChooseDepositFail>(
-    'CHOOSE_DEPOSIT', 'CHOOSE_DEPOSIT_COMPLETED', 'CHOOSE_DEPOSIT_FAIL',
+    'CHOOSE_DEPOSIT', 'CHOOSE_DEPOSIT_COMPLETED', 'CHOOSE_DEPOSIT_FAILED',
   );
+```
+each action creator accepts an optional argument payload that can be typed using the types in the library
+```typescript
+IPlainAction<T>     // T - action type
+IAction<T, P>       // T - action type, P - payload
+IPlainFailAction<T, E = string>   // T - action type, E - error
+IFailAction<T, P, E = string>     // T - action type, E - error, P - payload
+
+type IFetchDeposit = IPlainAction<'FETCH_DEPOSIT'>;
+type IFetchDepositSuccess = IAction<'FETCH_DEPOSIT_COMPLETED', IDeposit>;
+type IFetchDepositFail = IPlainFailAction<'FETCH_DEPOSIT_FAILED'>;
 ```
 ### Create redux state with `makeCommunicationReducer`
 ```typescript
@@ -31,10 +95,17 @@ import * as NS from './namespace';
 
 export const depositReducer = {
   depositFetching: makeCommunicationReducer<NS.IChooseDeposit, NS.IChooseDepositCompleted, NS.IChooseDepositFail>(
-    'CHOOSE_DEPOSIT',
-    'CHOOSE_DEPOSIT_COMPLETED',
-    'CHOOSE_DEPOSIT_FAIL',
+    'FETCH_DEPOSIT',
+    'FETCH_DEPOSIT_COMPLETED',
+    'FETCH_DEPOSIT_FAILED',
     initial.depositFetching,
   ),
+}
+```
+the state branch created looks like
+```typescript
+ICommunication {
+  isRequesting: boolean,
+  error: string,
 }
 ```
