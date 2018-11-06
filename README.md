@@ -3,7 +3,7 @@ Make communication actions and reducers for redux
 
 ## Motivation
 This library provides tools for creating and managing actions and reducers to manage your state when accessing a third-party server or backend server. The created state provides a flag for processing the status of the request, showing its error if there is one. Based on this state, you can display the process of client communication with the server.
-### How it was
+### How it looks like without a library
 Action creators
 ```javascript
 const fetchDeposit = (data) => {
@@ -20,24 +20,10 @@ const fetchDepositFailed = (error) => {
 }
 ```
 ```javascript
-// Use redux-saga for example
 ...
-const fetchDepositType = 'FETCH_DEPOSIT';
-
-function getSaga(deps) {
-  return function* saga() {
-    yield takeLatest(fetchDeposit, executeFetchDeposit, deps);
-  };
-}
-
-function* executeFetchDeposit({ api }) {
-  try {
-    const response = yield call(api.fetchDeposit);
-    yield put(actions.fetchDepositComplete(response));
-  } catch (error) {
-    yield put(actions.fetchDepositFailed(error));
-  }
-}
+const boundFetchDeposit = data => dispatch(fetchDeposit(data));
+const boundFetchDepositCompleted = data => dispatch(fetchDepositComplete(data));
+const boundFetchDepositFailed = error => dispatch(fetchDepositFailed(error));
 ```
 Reducers
 ```javascript
@@ -53,7 +39,6 @@ const depositReducer = (state, action) => {
   };
 }
 ```
-Library allow you to formalize and typify the management of your actions, encapsulating the logic of creating actions and reducers.
 ## Installation
 ```sh
 npm install @fsd/redux-make-communication --save
@@ -62,10 +47,11 @@ npm install @fsd/redux-make-communication --save
 yarn add @fsd/redux-make-communication
 ```
 ## API
+Library allow you to [formalize and typify](#usage) the management of your actions, encapsulating the logic of creating actions and reducers.
 `makeCommunicationActionCreators(string, string, string)` - a function that takes action(`execute`, `complete`, `failed`) types and returns an action creators (`executeAction`, `completedAction`, `FailedAction`).
 
 `makeCommunicationReducer('' | { string, boolean })` - a function that takes action(`execute`, `complete`, `failed`) types and initial state of reducer and returns a redux state.
-## Usage
+## <a name="usage"></a>Usage
 ### Create action creators with `makeCommunicationActionCreators`
 ```typescript
 import { makeCommunicationActionCreators } from '@fsd/redux-make-communication';
