@@ -21,9 +21,21 @@ const fetchDepositFailed = (error) => {
 ```
 ```javascript
 ...
-const boundFetchDeposit = data => dispatch(fetchDeposit(data));
-const boundFetchDepositCompleted = data => dispatch(fetchDepositComplete(data));
-const boundFetchDepositFailed = error => dispatch(fetchDepositFailed(error));
+// We use redux-thunk for example
+export const getDeposit = id => {
+  store.dispatch(fetchDeposit());
+  return function(dispatch, getState) {
+    return fetch(`https://deposits.com/${id}`)
+      .then(data => data.json())
+      .then(data => {
+        if (data.message === "Not Found") {
+          throw new Error("No such deposit found!");
+        }
+        dispatch(fetchDepositComplete(data));
+      })
+      .catch(error => dispatch(fetchDepositFailed(error)));
+  };
+};
 ```
 Reducers
 ```javascript
@@ -39,6 +51,7 @@ const depositReducer = (state, action) => {
   };
 }
 ```
+go to [usage](#usage) to see an example of our solution
 ## Installation
 ```sh
 npm install @fsd/redux-make-communication --save
@@ -47,7 +60,7 @@ npm install @fsd/redux-make-communication --save
 yarn add @fsd/redux-make-communication
 ```
 ## API
-Library allow you to [formalize and typify](#usage) the management of your actions, encapsulating the logic of creating actions and reducers.
+Library allow you to formalize and typify the management of your actions, encapsulating the logic of creating actions and reducers.
 `makeCommunicationActionCreators(string, string, string)` - a function that takes action(`execute`, `complete`, `failed`) types and returns an action creators (`executeAction`, `completedAction`, `FailedAction`).
 
 `makeCommunicationReducer('' | { string, boolean })` - a function that takes action(`execute`, `complete`, `failed`) types and initial state of reducer and returns a redux state.
