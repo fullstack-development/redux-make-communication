@@ -64,7 +64,7 @@ Library allow you to formalize and typify the management of your actions, encaps
 `makeCommunicationActionCreators(string, string, string)` - a function that takes action(`execute`, `complete`, `failed`) types and returns an action creators (`executeAction`, `completedAction`, `FailedAction`).
 
 `makeCommunicationReducer('' | { string, boolean })` - a function that takes action(`execute`, `complete`, `failed`) types and initial state of reducer and returns a redux state.
-## <a name="usage"></a>Usage
+## Usage
 ### Create action creators with `makeCommunicationActionCreators`
 ```typescript
 import { makeCommunicationActionCreators } from '@fsd/redux-make-communication';
