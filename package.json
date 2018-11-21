@@ -1,5 +1,5 @@
 {
-  "name": "@fsd/redux-make-communication",
+  "name": "redux-make-communication",
   "version": "1.0.0",
   "description": "Make communication actions and reducers for redux",
   "main": "dist/index.js",

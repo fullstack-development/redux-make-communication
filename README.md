@@ -54,10 +54,10 @@ const depositReducer = (state, action) => {
 go to [usage](#usage) to see an example of our solution
 ## Installation
 ```sh
-npm install @fsd/redux-make-communication --save
+npm install redux-make-communication --save
 ```
 ```sh
-yarn add @fsd/redux-make-communication
+yarn add redux-make-communication
 ```
 ## API
 Library allow you to formalize and typify the management of your actions, encapsulating the logic of creating actions and reducers.
@@ -67,7 +67,7 @@ Library allow you to formalize and typify the management of your actions, encaps
 ## Usage
 ### Create action creators with `makeCommunicationActionCreators`
 ```typescript
-import { makeCommunicationActionCreators } from '@fsd/redux-make-communication';
+import { makeCommunicationActionCreators } from 'redux-make-communication';
 import * as NS from './namespace';
 
 export const { execute: chooseDeposit, completed: chooseDepositCompleted, failed: chooseDepositFail } =
@@ -88,7 +88,7 @@ type IFetchDepositFail = IPlainFailAction<'FETCH_DEPOSIT_FAILED'>;
 ```
 ### Create redux state with `makeCommunicationReducer`
 ```typescript
-import { makeCommunicationReducer } from '@fsd/redux-make-communication';
+import { makeCommunicationReducer } from 'redux-make-communication';
 import initial from './initial';
 import * as NS from './namespace';
 
