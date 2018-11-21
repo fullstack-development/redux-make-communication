@@ -1,6 +1,6 @@
 {
   "name": "@fsd/redux-make-communication",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Make communication actions and reducers for redux",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,5 +25,8 @@
   "homepage": "https://github.com/fullstack-development/redux-make-communication#readme",
   "devDependencies": {
     "typescript": "^3.1.3"
+  },
+  "dependencies": {
+    "react-redux": "^5.1.1"
   }
 }
