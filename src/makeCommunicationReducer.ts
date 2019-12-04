@@ -9,7 +9,7 @@ export default function makeCommunicationReducer<
     completedType: C['type'],
     failedType: F['type'],
     initial: ICommunication<F['error']>,
-): (state: ICommunication<F['error']> | undefined, action: IPlainAction<string>) => ICommunication<F['error']> {
+): (state: ICommunication<F['error']>, action: IPlainAction<string>) => ICommunication<F['error']> {
   return (state: ICommunication<F['error']> = initial, action: IPlainAction<string>) => {
     switch (action.type) {
       case executeType: return { error: '', isRequesting: true };
