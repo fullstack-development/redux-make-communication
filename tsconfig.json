@@ -1,17 +1,24 @@
 {
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types"],
-    "traceResolution": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
+    /* Basic Options */
     "target": "es5",
     "module": "commonjs",
+    "lib": ["es2020"],
     "declaration": true,
-    "baseUrl": "./src",
     "outDir": "./dist",
-    "lib": ["es2015", "es2017", "es6", "es7", "es5"],
+
+    /* Type-Checking Options */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "typeRoots": ["./node_modules/@types"],
     "esModuleInterop": true,
-    "strict": true
   },
   "include": [
     "src/**/*"
