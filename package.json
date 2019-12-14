@@ -5,9 +5,22 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prebuild": "npm run clean",
     "build": "tsc",
+    "clean": "rm -rf ./dist",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx && tsc --noEmit --pretty",
     "lint:autofix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "repository": {
     "type": "git",
@@ -27,8 +40,12 @@
   },
   "homepage": "https://github.com/fullstack-development/redux-make-communication#readme",
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2",
     "eslint": "^6.7.2",
     "eslint-config-airbnb-typescript": "^6.3.1",
     "eslint-config-prettier": "^6.7.0",
@@ -38,6 +55,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "husky": "^3.1.0",
     "prettier": "^1.19.1",
     "typescript": "^3.7.3"
   },
