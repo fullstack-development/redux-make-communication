@@ -1,3 +1,3 @@
-export { default as makeCommunicationActionCreators } from './makeCommunicationActionCreators';
-export { default as makeCommunicationReducer } from './makeCommunicationReducer';
+export { makeCommunicationActionCreators } from './makeCommunicationActionCreators';
+export { makeCommunicationReducer } from './makeCommunicationReducer';
 export * from './init';
