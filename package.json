@@ -1,6 +1,6 @@
 {
   "name": "redux-make-communication",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Make communication actions and reducers for redux",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
