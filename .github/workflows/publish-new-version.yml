@@ -50,7 +50,7 @@ jobs:
           password $GITHUB_TOKEN
           EOF
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_IN19FARKT }}
 
       - name: Bump version
         run: HUSKY_SKIP_HOOKS=1 npx standard-version
