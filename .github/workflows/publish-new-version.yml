@@ -19,7 +19,7 @@ jobs:
       - run: npm run lint
 
   release:
-    if: "!contains(github.event.head_commit.author.name, 'Bump Version')"
+    if: "!startsWith(github.event.head_commit.message, 'chore(release)') && !contains(github.event.head_commit.message, '[SKIP-CI]')"
     needs: test
     runs-on: ubuntu-latest
     steps:
