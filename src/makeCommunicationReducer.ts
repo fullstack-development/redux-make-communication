@@ -6,8 +6,8 @@ export function makeCommunicationReducer<
   F extends IPlainFailAction<string> = IProtectAction
 >(
   executeType: E['type'],
-  completedType: C['type'],
-  failedType: F['type'],
+  successType: C['type'],
+  failType: F['type'],
   initial: ICommunication<F['error']>,
 ): (
   state: ICommunication<F['error']> | undefined,
@@ -17,9 +17,9 @@ export function makeCommunicationReducer<
     switch (action.type) {
       case executeType:
         return { error: '', isRequesting: true };
-      case completedType:
+      case successType:
         return { error: '', isRequesting: false };
-      case failedType:
+      case failType:
         return { error: (action as F).error, isRequesting: false };
       default:
         return state;

@@ -26,8 +26,8 @@ export interface IProtectAction {
 
 export interface ICommunicationActionCreators<E, C, F> {
   execute: E;
-  completed: C;
-  failed: F;
+  success: C;
+  fail: F;
 }
 
 export type IGenericPlainAction = IPlainAction<string>;
