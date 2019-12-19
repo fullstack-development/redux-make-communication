@@ -2,7 +2,7 @@ import { ICommunication } from './namespace';
 
 export const initialCommunicationField: ICommunication = { isRequesting: false, error: '' };
 
-export function initCommunicationFields<S>(
+export function initCommunications<S>(
   fieldNames: Array<keyof S>,
 ): { [P in keyof S]: ICommunication } {
   return fieldNames.reduce(
